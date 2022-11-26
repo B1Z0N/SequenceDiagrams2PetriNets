@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SD:SD xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SD="SD">
+  <messages xsi:type="SD:Call" mess="op()" input="//@objects.0" output="//@objects.1"/>
+  <messages xsi:type="SD:Return" mess="return 4" input="//@objects.1" output="//@objects.0"/>
+  <messages xsi:type="SD:CallAck" mess="opack()" input="//@objects.0" output="//@objects.1"/>
+  <objects name="0"/>
+  <objects name="1"/>
+</SD:SD>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PN:PN xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:PN="PN" xsi:schemaLocation="PN ../../../PetriNets/model/PetriNet.ecore">
+  <node xsi:type="PN:Place" name="START_0"/>
+  <node xsi:type="PN:Place" name="START_1"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="op()"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="return 4"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="opack()"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="opack()_ack"/>
+  <linkage input="//@node.0" output="//@node.2"/>
+  <linkage input="//@node.2" output="//@node.3"/>
+  <linkage input="//@node.1" output="//@node.4"/>
+  <linkage input="//@node.4" output="//@node.5"/>
+  <linkage input="//@node.2" output="//@node.6"/>
+  <linkage input="//@node.6" output="//@node.4"/>
+  <linkage input="//@node.5" output="//@node.7"/>
+  <linkage input="//@node.7" output="//@node.8"/>
+  <linkage input="//@node.3" output="//@node.9"/>
+  <linkage input="//@node.9" output="//@node.10"/>
+  <linkage input="//@node.7" output="//@node.11"/>
+  <linkage input="//@node.11" output="//@node.9"/>
+  <linkage input="//@node.10" output="//@node.12"/>
+  <linkage input="//@node.12" output="//@node.13"/>
+  <linkage input="//@node.8" output="//@node.14"/>
+  <linkage input="//@node.14" output="//@node.15"/>
+  <linkage input="//@node.12" output="//@node.16"/>
+  <linkage input="//@node.16" output="//@node.14"/>
+  <linkage input="//@node.13" output="//@node.17"/>
+  <linkage input="//@node.17" output="//@node.18"/>
+  <linkage input="//@node.15" output="//@node.19"/>
+  <linkage input="//@node.19" output="//@node.20"/>
+  <linkage input="//@node.14" output="//@node.21"/>
+  <linkage input="//@node.21" output="//@node.17"/>
+</PN:PN>

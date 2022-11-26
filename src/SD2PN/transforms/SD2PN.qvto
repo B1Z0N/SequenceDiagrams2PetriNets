@@ -1,0 +1,119 @@
+modeltype SD uses 'http://www.example.org/sequencediagrams'; -- mappings to these set in .settings
+modeltype PN uses 'http://www.example.org/petrinets';
+
+transformation SD2PN(in SequenceDiagrams : SD, out PN);
+
+main()  {
+	SequenceDiagrams.rootObjects()[SD::SD]->asOrderedSet()->first()-> map diagram2nets()
+}
+
+// API
+
+mapping SD::SD::diagram2nets() : PN::PN {
+	init {
+		var recentPlacesPerObject : Dict(SD::Object, PN::Place) := Dict{ };
+		self.objects->forEach (o) {
+			var recentPlace := object PN::Place { name := 'START_' + o.name };
+			recentPlacesPerObject->put(o, recentPlace);
+		};
+	}
+	
+	node += recentPlacesPerObject->values();
+	self.messages->forEach (m) {
+		var subnet := m.message2nets(recentPlacesPerObject);
+		node += subnet.node;
+		linkage += subnet.linkage;
+	};
+}
+
+intermediate class PetriNetContainer {
+	node : OrderedSet(PN::Node);
+	linkage : OrderedSet(PN::Linkage);
+}
+
+query SD::Message::message2nets(inout recentPlaces : Dict(SD::Object, PN::Place)) : PetriNetContainer {
+	if (self.oclIsTypeOf(SD::CallAck)) return self.oclAsType(SD::CallAck).messageAndAck2NetsImpl(recentPlaces)
+	else return self.simpelMessage2NetsImpl(recentPlaces)
+	endif;
+}
+
+// Logic
+
+query SD::Message::simpelMessage2NetsImpl(inout recentPlaces : Dict(SD::Object, PN::Place)) : PetriNetContainer {
+	var inputPlace := recentPlaces->get(self.input);
+	var outputPlace := recentPlaces->get(self.output);
+	var net := object PetriNetContainer { };
+
+	var inputTransition := createLinkageToTransitionFrom(inputPlace, net);
+	var inputFinalPlace := createLinkageToPlaceFrom(inputTransition, net);
+	recentPlaces->put(self.input, inputFinalPlace);
+	
+	var outputTransition := createLinkageToTransitionFrom(outputPlace, net);
+	var outputFinalPlace := createLinkageToPlaceFrom(outputTransition, net);
+	recentPlaces->put(self.output, outputFinalPlace);
+	
+	var mediatorPlace := self.createMediator(inputTransition, outputTransition, net);
+
+	return net;
+}
+
+query SD::CallAck::messageAndAck2NetsImpl(inout recentPlaces : Dict(SD::Object, PN::Place)) : PetriNetContainer {
+	var inputPlace := recentPlaces->get(self.input);
+	var outputPlace := recentPlaces->get(self.output);
+	var net := object PetriNetContainer { };
+	
+	// Message
+	var inputTransition := createLinkageToTransitionFrom(inputPlace, net);
+	var inputFinalPlace := createLinkageToPlaceFrom(inputTransition, net);
+	
+	var outputTransition := createLinkageToTransitionFrom(outputPlace, net);
+	var outputFinalPlace := createLinkageToPlaceFrom(outputTransition, net);
+	
+	var mediatorPlace := self.createMediator(inputTransition, outputTransition, net);
+	
+	// Ack
+	var inputAckTransition := createLinkageToTransitionFrom(inputFinalPlace, net);	
+	var inputAckFinalPlace := createLinkageToPlaceFrom(inputAckTransition, net);
+	recentPlaces->put(self.input, inputAckFinalPlace);
+	
+	var outputAfterAckTransition := createLinkageToTransitionFrom(outputFinalPlace, net);
+	var outputAckFinalPlace := createLinkageToPlaceFrom(outputAfterAckTransition, net);
+	recentPlaces->put(self.output, outputAckFinalPlace);
+	
+	var mediatorAckPlace := self.createMediator(outputTransition, inputAckTransition, net);
+	mediatorAckPlace.name := mediatorAckPlace.name + '_ack';
+	
+	return net;
+}
+
+// Utils
+property transitionCounter: Integer = -1;
+
+helper createLinkageToTransitionFrom(place: PN::Place, inout net: PetriNetContainer) : PN::Transition {
+	transitionCounter := transitionCounter + 1;
+	var transition := object PN::Transition { name := "T" + transitionCounter.toString() };
+	net.node += transition;
+	net.linkage += object PN::Linkage { input := place; output := transition };
+	return transition;
+}
+
+property placeCounter: Integer = -1;
+helper createLinkageToPlaceFrom(transition: PN::Transition, inout net: PetriNetContainer) : PN::Place {
+	placeCounter := placeCounter + 1;
+	var place := object PN::Place { name := "P" + placeCounter.toString() };
+	net.node += place;
+	net.linkage += object PN::Linkage { input := transition; output := place };
+	return place;
+}
+
+helper SD::Message::createMediator(inputTransition: PN::Transition, outputTransition: PN::Transition, inout net: PetriNetContainer) : PN::Place {
+	var mediator := object PN::Place { name := self.mess };
+	if (self.mess.trim() = "") {
+		placeCounter := placeCounter + 1;
+		mediator.name := "M" + placeCounter.toString();
+	};
+	net.node += mediator;
+	net.linkage += object PN::Linkage { input := inputTransition; output := mediator };
+	net.linkage += object PN::Linkage { input := mediator; output := outputTransition };
+	return mediator;
+}

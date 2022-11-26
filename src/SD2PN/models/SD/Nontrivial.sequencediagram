@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SD:SD xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SD="SD">
+  <messages xsi:type="SD:CallAck" mess="log('Running')" input="//@objects.1" output="//@objects.0"/>
+  <messages xsi:type="SD:Call" mess="start_server()" input="//@objects.1" output="//@objects.2"/>
+  <messages xsi:type="SD:CallAck" mess="log('Server initialized')" input="//@objects.2" output="//@objects.0"/>
+  <messages xsi:type="SD:Call" mess="query_client()" input="//@objects.1" output="//@objects.3"/>
+  <messages xsi:type="SD:CallAck" mess="query_server()" input="//@objects.3" output="//@objects.2"/>
+  <messages xsi:type="SD:Return" mess="return query_result" input="//@objects.3" output="//@objects.1"/>
+  <messages xsi:type="SD:CallAck" mess="log('Finished')" input="//@objects.1" output="//@objects.0"/>
+  <objects name="logger"/>
+  <objects name="main"/>
+  <objects name="server"/>
+  <objects name="client"/>
+</SD:SD>

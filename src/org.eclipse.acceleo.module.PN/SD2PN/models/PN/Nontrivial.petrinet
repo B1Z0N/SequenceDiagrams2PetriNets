@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PN:PN xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:PN="http://www.example.org/petrinets" xsi:schemaLocation="http://www.example.org/petrinets ../../../PetriNets/model/PetriNet.ecore">
+  <node xsi:type="PN:Place" name="START_main"/>
+  <node xsi:type="PN:Place" name="START_client"/>
+  <node xsi:type="PN:Place" name="START_logger"/>
+  <node xsi:type="PN:Place" name="START_server"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="log('Running')"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="log('Running')_ack"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="start_server()"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="log('Server initialized')"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="log('Server initialized')_ack"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="query_client()"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="query_server()"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="query_server()_ack"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="return query_result"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="log('Finished')"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Transition"/>
+  <node xsi:type="PN:Place"/>
+  <node xsi:type="PN:Place" name="log('Finished')_ack"/>
+  <linkage input="//@node.0" output="//@node.4"/>
+  <linkage input="//@node.4" output="//@node.5"/>
+  <linkage input="//@node.2" output="//@node.6"/>
+  <linkage input="//@node.6" output="//@node.7"/>
+  <linkage input="//@node.4" output="//@node.8"/>
+  <linkage input="//@node.8" output="//@node.6"/>
+  <linkage input="//@node.5" output="//@node.9"/>
+  <linkage input="//@node.9" output="//@node.10"/>
+  <linkage input="//@node.7" output="//@node.11"/>
+  <linkage input="//@node.11" output="//@node.12"/>
+  <linkage input="//@node.6" output="//@node.13"/>
+  <linkage input="//@node.13" output="//@node.9"/>
+  <linkage input="//@node.10" output="//@node.14"/>
+  <linkage input="//@node.14" output="//@node.15"/>
+  <linkage input="//@node.3" output="//@node.16"/>
+  <linkage input="//@node.16" output="//@node.17"/>
+  <linkage input="//@node.14" output="//@node.18"/>
+  <linkage input="//@node.18" output="//@node.16"/>
+  <linkage input="//@node.17" output="//@node.19"/>
+  <linkage input="//@node.19" output="//@node.20"/>
+  <linkage input="//@node.12" output="//@node.21"/>
+  <linkage input="//@node.21" output="//@node.22"/>
+  <linkage input="//@node.19" output="//@node.23"/>
+  <linkage input="//@node.23" output="//@node.21"/>
+  <linkage input="//@node.20" output="//@node.24"/>
+  <linkage input="//@node.24" output="//@node.25"/>
+  <linkage input="//@node.22" output="//@node.26"/>
+  <linkage input="//@node.26" output="//@node.27"/>
+  <linkage input="//@node.21" output="//@node.28"/>
+  <linkage input="//@node.28" output="//@node.24"/>
+  <linkage input="//@node.15" output="//@node.29"/>
+  <linkage input="//@node.29" output="//@node.30"/>
+  <linkage input="//@node.1" output="//@node.31"/>
+  <linkage input="//@node.31" output="//@node.32"/>
+  <linkage input="//@node.29" output="//@node.33"/>
+  <linkage input="//@node.33" output="//@node.31"/>
+  <linkage input="//@node.32" output="//@node.34"/>
+  <linkage input="//@node.34" output="//@node.35"/>
+  <linkage input="//@node.25" output="//@node.36"/>
+  <linkage input="//@node.36" output="//@node.37"/>
+  <linkage input="//@node.34" output="//@node.38"/>
+  <linkage input="//@node.38" output="//@node.36"/>
+  <linkage input="//@node.35" output="//@node.39"/>
+  <linkage input="//@node.39" output="//@node.40"/>
+  <linkage input="//@node.37" output="//@node.41"/>
+  <linkage input="//@node.41" output="//@node.42"/>
+  <linkage input="//@node.36" output="//@node.43"/>
+  <linkage input="//@node.43" output="//@node.39"/>
+  <linkage input="//@node.40" output="//@node.44"/>
+  <linkage input="//@node.44" output="//@node.45"/>
+  <linkage input="//@node.30" output="//@node.46"/>
+  <linkage input="//@node.46" output="//@node.47"/>
+  <linkage input="//@node.44" output="//@node.48"/>
+  <linkage input="//@node.48" output="//@node.46"/>
+  <linkage input="//@node.47" output="//@node.49"/>
+  <linkage input="//@node.49" output="//@node.50"/>
+  <linkage input="//@node.27" output="//@node.51"/>
+  <linkage input="//@node.51" output="//@node.52"/>
+  <linkage input="//@node.49" output="//@node.53"/>
+  <linkage input="//@node.53" output="//@node.51"/>
+  <linkage input="//@node.50" output="//@node.54"/>
+  <linkage input="//@node.54" output="//@node.55"/>
+  <linkage input="//@node.52" output="//@node.56"/>
+  <linkage input="//@node.56" output="//@node.57"/>
+  <linkage input="//@node.51" output="//@node.58"/>
+  <linkage input="//@node.58" output="//@node.54"/>
+</PN:PN>
